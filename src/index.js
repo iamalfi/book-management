@@ -3,7 +3,7 @@ const app = express();
 const route = require("./route/route");
 const cors = require("cors");
 const mongoose = require("mongoose");
-var cors = require("cors");
+
 app.use(express.json());
 mongoose
     .connect(
@@ -28,12 +28,10 @@ app.use(cors());
 
 app.use((err, req, res, next) => {
     if (err.message === "Unexpected end of JSON input") {
-        return res
-            .status(400)
-            .send({
-                status: false,
-                message: "ERROR Parsing Data, Please Provide a Valid JSON",
-            });
+        return res.status(400).send({
+            status: false,
+            message: "ERROR Parsing Data, Please Provide a Valid JSON",
+        });
     } else {
         next();
     }
